@@ -1,0 +1,8 @@
+{
+    "name": "jcotton1123/php-jdbc-bridge",
+    "type": "library",
+    "description": "PHP to JDBC bridge",
+    "autoload": {
+        "psr-4": { "": "php/" }
+    }
+}

@@ -1,0 +1,98 @@
+#!/bin/sh
+#
+# pjbridge  Startup script for pjbridge
+#
+# chkconfig:   - 84 15
+# description: pjbridge
+
+### BEGIN INIT INFO
+# Provides: pjbridge
+# Required-Start: $local_fs $network $remote_fs
+# Required-Stop: $local_fs $network $remote_fs
+# Default-Start:
+# Default-Stop:
+# Short-Description: start and stop pjbridge
+# Description: pjbridge
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+prog="pjbridge"
+
+[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+lockfile=/var/lock/subsys/$prog
+pidfile=/var/run/pjbridge.pid
+
+start() {
+    echo -n $"Starting $prog: "
+    cd $WORKING_DIR && \
+    /usr/bin/jsvc \
+        -home $JAVA_HOME \
+        -user $RUNAS_USER \
+        -cp $(find lib/ -name *.jar | xargs | tr ' ' ':') \
+        -outfile "logs/pjbridge.log" \
+        -errfile '&1' \
+        -pidfile $pidfile \
+        Service $DRIVER $PORT
+
+    retval=$?
+    [ $retval -eq 0 ] && touch $lockfile
+    [ $retval -eq 0 ] && success || failure
+    echo
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    /usr/bin/jsvc \
+        -stop \
+        -home $JAVA_HOME \
+        -user $RUNAS_USER \
+        -pidfile $pidfile \
+        Service
+    retval=$?
+    [ $retval -eq 0 ] && rm -f $lockfile
+    [ $retval -eq 0 ] && success || failure
+    echo
+    return $retval
+}
+
+restart() {
+    stop
+    sleep 3
+    start
+}
+
+rh_status() {
+    status -p $pidfile $prog
+    retval=$?
+    return $retval
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    status)
+        rh_status
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 2
+esac
+exit $?
+

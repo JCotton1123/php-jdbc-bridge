@@ -1,0 +1,12 @@
+# Mac nonsense
+.DS_Store
+
+# Exclude java build artifacts
+java/class
+java/lib
+java/tmp
+
+# Exclude RPM build artifacts
+java/rpm/*
+!java/rpm/specfile
+!java/rpm/SOURCES/
