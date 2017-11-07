@@ -74,7 +74,7 @@ if(!$result){
 
 $cursor = $db->exec("SELECT * FROM \"AR Customer File\"");
 
-while($row = $this->db->fetch_array($cursor)){
+while($row = $db->fetch_array($cursor)){
     print_r($row);
 }
 
