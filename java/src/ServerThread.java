@@ -43,7 +43,7 @@ public class ServerThread extends Thread {
         this.socket.setSoLinger(false, 0);
         
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        this.out = new PrintWriter(socket.getOutputStream(), true);
+        this.out = new PrintWriter(socket.getOutputStream(), false);
         this.serverCommands = new ServerCommands(this);
     }
     
@@ -77,6 +77,7 @@ public class ServerThread extends Thread {
                     
                     break;
                 }
+                out.flush();
             }
             
             serverCommands.close();
