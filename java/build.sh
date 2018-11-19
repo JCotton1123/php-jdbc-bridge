@@ -2,13 +2,15 @@
 
 mkdir -p lib class tmp
 
+COMMONS_DAEMON_VER=commons-daemon-1.1.0
+
 wget \
-  -O tmp/commons-daemon-1.0.15-bin.tar.gz \
-  "http://apache.claz.org//commons/daemon/binaries/commons-daemon-1.0.15-bin.tar.gz"
+  -O tmp/${COMMONS_DAEMON_VER}-bin.tar.gz \
+  "http://apache.claz.org//commons/daemon/binaries/${COMMONS_DAEMON_VER}-bin.tar.gz"
 tar -C lib/ \
   --strip-components=1 \
-  -zxvf tmp/commons-daemon-1.0.15-bin.tar.gz \
-  commons-daemon-1.0.15/commons-daemon-1.0.15.jar
+  -zxvf tmp/${COMMONS_DAEMON_VER}-bin.tar.gz \
+  ${COMMONS_DAEMON_VER}/${COMMONS_DAEMON_VER}.jar
 
-javac -cp lib/commons-daemon-1.0.15.jar -d class/ src/*
+javac -cp lib/${COMMONS_DAEMON_VER}.jar -d class/ src/*
 jar cfe lib/pjbridge.jar Server -C class .
