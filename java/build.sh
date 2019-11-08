@@ -2,7 +2,7 @@
 
 mkdir -p lib class tmp
 
-COMMONS_DAEMON_VER=commons-daemon-1.1.0
+COMMONS_DAEMON_VER=commons-daemon-1.2.2
 
 wget \
   -O tmp/${COMMONS_DAEMON_VER}-bin.tar.gz \
