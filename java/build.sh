@@ -6,7 +6,7 @@ COMMONS_DAEMON_VER=commons-daemon-1.2.2
 
 wget \
   -O tmp/${COMMONS_DAEMON_VER}-bin.tar.gz \
-  "http://apache.claz.org//commons/daemon/binaries/${COMMONS_DAEMON_VER}-bin.tar.gz"
+  "https://archive.apache.org/dist/commons/daemon/binaries/${COMMONS_DAEMON_VER}-bin.tar.gz"
 tar -C lib/ \
   --strip-components=1 \
   -zxvf tmp/${COMMONS_DAEMON_VER}-bin.tar.gz \
