@@ -3,6 +3,6 @@
     "type": "library",
     "description": "PHP to JDBC bridge",
     "autoload": {
-        "psr-4": { "": "php/" }
+        "psr-4": { "SmileleyLettuce\\JDBCBridge\\": "php" }
     }
 }

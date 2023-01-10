@@ -1,5 +1,7 @@
 <?php
 
+namespace SmileleyLettuce\JDBCBridge;
+
 /*
  * Copyright (C) 2007 lenny@mondogrigio.cjb.net
  *

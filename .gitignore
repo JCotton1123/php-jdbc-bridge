@@ -10,3 +10,7 @@ java/tmp
 java/rpm/*
 !java/rpm/specfile
 !java/rpm/SOURCES/
+
+# Exclude composer stuff
+vendor
+composer.lock
